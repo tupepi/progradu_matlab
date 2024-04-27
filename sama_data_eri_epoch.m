@@ -6,18 +6,9 @@ function output = sama_data_eri_epoch(P)
     meta_data = jsondecode(meta_text);
     S = dir(fullfile(P,'*.wav'));
     audiolkm = numel(S);
-    %audiot = ones(audiolkm,1);
     %%
     clc;
-    % HUOM: 
-    % MITTAREIDEN LUKUMÄÄRÄ = 5
-    % +epoch-sarake=1
-    % +CT-sarake=1
-    % +inputin nimi=1
-    %mittari_lkm=5;
-    %muut_sarakkeet=3;
     %sarakkeet = {"MFCC","RMSE","ESR","MSE","PSD","Epochit","CT","input_nimi"};
-    %tulokset = ones(audiolkm,mittari_lkm+muut_sarakkeet);
     mittari_lkm=5;
     sarake_lkm=8;
     for k = 1:audiolkm
@@ -25,6 +16,7 @@ function output = sama_data_eri_epoch(P)
         [y,] = audioread(F);
         tulos = vertaile_aania(op,y,S(k).name);
         if (k == 1)
+            % Ekalla kerralla varmistetaan sarakkeiden ja mittareiden lkm
             sarakkeet = {tulos{1,:}};
             [r,mittari_lkm] = size(sarakkeet);
             sarakkeet = [sarakkeet,{"Epochit","CT","input_nimi"}];
