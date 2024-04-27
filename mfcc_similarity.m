@@ -10,5 +10,5 @@ function mfcc_s = mfcc_similarity(signal1,fs1,signal2,fs2)
     mfccs2_flat = mfccs2(:);
     
     % Calculate cosine similarity
-    mfcc_s = dot(mfccs1_flat, mfccs2_flat) / (norm(mfccs1_flat) * norm(mfccs2_flat)); 
+    mfcc_s = 1 - dot(mfccs1_flat, mfccs2_flat) / (norm(mfccs1_flat) * norm(mfccs2_flat)); 
 end

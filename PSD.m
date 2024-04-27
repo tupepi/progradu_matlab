@@ -4,5 +4,5 @@ function PSD = PSD(signal1,Fs1,signal2,Fs2)
     [Pxx2, f2] = periodogram(signal2, hamming(length(signal2)), [], Fs2);
     
     % Compare PSDs
-    PSD = dot(Pxx1, Pxx2) / (norm(Pxx1) * norm(Pxx2));
+    PSD = 1 - dot(Pxx1, Pxx2) / (norm(Pxx1) * norm(Pxx2));
 end
