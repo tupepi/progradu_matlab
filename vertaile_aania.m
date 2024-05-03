@@ -1,18 +1,17 @@
-function output = vertaile_aania(s1,s2,str)
+% Vertaillaan annettuja ääniä 
+function output = vertaile_aania(s1,s2)
+    % Näytteenottotaajuus
     fs = 48000;
     
     % highpass lowpass
-    %s1 = lowpass(highpass(s1,60,fs),17000,fs);
-    %s2 = lowpass(highpass(s2,60,fs),17000,fs);
-
-    % Joku normalisointi voisi olla paikallaan
-    %s1 = normalize(s1(:,1),"scale");
-    %s2 = normalize(s2(:,1),"scale");
-
+    %s1 = highpass(s1,700,fs);
+    %s2 = highpass(s2,700,fs);
+    %s1 = lowpass(s1);
+    %s2 = lowpass(s2);
+  
     % Alkamaan samasta kohtaa
     %[s1,s2] = alignsignals(s1,s2);
 
-   
     % Nollia lyhyemmän perään
     eri_mittaiset = true;
     if (eri_mittaiset)
@@ -24,15 +23,13 @@ function output = vertaile_aania(s1,s2,str)
     end
 
     % Vertailtavat mittarit
-    mfcc_s     = mfcc_similarity(s1,fs,s2,fs);
-    rmse_s     = rmse(s1, s2);
+    rmse_s     = rmse(s1, s2); % Suoraan matlabin oma
+    mfcc_s     = mfcc_similarity(s1,fs,s2,fs); 
     esr_s      = esr(s1,s2); 
-    mse_s      = immse(s1,s2);
+    fft_s      = FFTs(s1,s2);
     psd_s      = PSD(s1,fs,s2,fs);
     
-    
-    output = {"MFCC", "RMSE", "ESR", "MSE", "PSD";
-               mfcc_s, rmse_s, esr_s, mse_s, psd_s};
+    output = {"MFCC", "RMSE", "ESR", "PSD", "FFT";
+               mfcc_s, rmse_s, esr_s, psd_s, fft_s};
 
-    %output = [mfcc_s rmse_s esr_s mse_s psd_s];
 end
