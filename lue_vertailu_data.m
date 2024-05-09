@@ -10,7 +10,7 @@ S = dir(fullfile(P,'*.txt'));
 
 % HUOM KOVAKOODATTU!
 % 1600 sekuntia
-kesto = 1650.0;
+kesto = 1600.0;
 
 % jos 0, vertaillaan normaalisti kestoa vastaavat inputit
 % jos 1, vertaillaan muiden kanssa input0 ja 1 epoch
@@ -81,15 +81,23 @@ for k = 1:tulos_rivit-1-yhden_epochin_vertailu
     samat_kestot(k+1,:) = input(halutturivi,:);
 end
 
-f = figure('units','normalized','outerposition',[0 0 1 1]);
-t = tiledlayout(2,4);
+f = figure;%('units','normalized','outerposition',[0 0 1 1]);
+t = tiledlayout(3,2);
 
 % käännetään sarakkeet ja rivit päikseen
 %tulokset = cell(sarak-1,tulos_rivit);
 tulokset = rot90(samat_kestot);
 [rivit, sarak] = size(tulokset);
-  
+tulokset(:,1:sarak);
 for i = 2:rivit
+     if (tulokset(i,1) == "Spectrogram")
+        continue
+     end
+
+    if (i == 3)
+        continue
+    end
+
     X = categorical(tulokset(1,2:sarak));
     Y = cell2mat(tulokset(i,2:sarak));
     nexttile(t)

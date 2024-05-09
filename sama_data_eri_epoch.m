@@ -2,7 +2,7 @@
 % ja meta.json tiedosto ja vertaillaan äänitteitä kovakoodattuun
 % äänitteeseen
 % Tallentaa vertailudatat kuvaajina ja txt-tiedostoom
-function output = sama_data_eri_epoch(P)
+function output = sama_data_eri_epoch(P,op)
     % Ladataan annetusta hakemistosta kaikki äänitteet ja meta-tiedot
     [~,input_nimi,~] = fileparts(P);
     meta_text = fileread(fullfile(P,"meta.json"));
@@ -10,9 +10,7 @@ function output = sama_data_eri_epoch(P)
     S = dir(fullfile(P,'*.wav'));
     audiolkm = numel(S);
 
-    % Ladataan äänite johon verrataan aiemmin ladattuja
-    output = './data/output-metal-rock.wav';
-    [op, ] = audioread(output);
+    
     
 
     % Nämä varmistetaan myöhemmin oikeiksi
@@ -26,7 +24,7 @@ function output = sama_data_eri_epoch(P)
         tulos = vertaile_aania(op,y);
         if (k == 1)
             % Ekalla kerralla varmistetaan sarakkeiden ja mittareiden lkm
-            sarakkeet = {tulos{1,:}};
+            sarakkeet = tulos(1,:);
             [~,mittari_lkm] = size(sarakkeet);
 
             % Lisätää meta-tiedoista sarakkeita

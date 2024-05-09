@@ -10,7 +10,7 @@ function output = vertaile_aania(s1,s2)
     %s2 = lowpass(s2);
   
     % Alkamaan samasta kohtaa
-    %[s1,s2] = alignsignals(s1,s2);
+    [s1,s2] = alignsignals(s1,s2);
 
     % Nollia lyhyemmän perään
     eri_mittaiset = true;
@@ -28,8 +28,9 @@ function output = vertaile_aania(s1,s2)
     esr_s      = esr(s1,s2); 
     fft_s      = FFTs(s1,s2);
     psd_s      = PSD(s1,fs,s2,fs);
+    spec       = spectrogram_diff(s1,s2);
     
-    output = {"MFCC", "RMSE", "ESR", "PSD", "FFT";
-               mfcc_s, rmse_s, esr_s, psd_s, fft_s};
+    output = {"MFCC", "RMSE", "ESR", "PSD", "FFT", "Spectrogram";
+               mfcc_s, rmse_s, esr_s, psd_s, fft_s, spec};
 
 end
