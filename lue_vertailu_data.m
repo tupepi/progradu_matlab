@@ -10,7 +10,7 @@ S = dir(fullfile(P,'*.txt'));
 
 % HUOM KOVAKOODATTU!
 % 1600 sekuntia
-kesto = 1600.0;
+kesto = 1700.0;
 
 % jos 0, vertaillaan normaalisti kestoa vastaavat inputit
 % jos 1, vertaillaan muiden kanssa input0 ja 1 epoch
@@ -83,7 +83,6 @@ end
 
 f = figure;%('units','normalized','outerposition',[0 0 1 1]);
 t = tiledlayout(3,2);
-
 % käännetään sarakkeet ja rivit päikseen
 %tulokset = cell(sarak-1,tulos_rivit);
 tulokset = rot90(samat_kestot);

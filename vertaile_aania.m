@@ -2,7 +2,7 @@
 function output = vertaile_aania(s1,s2)
     % Näytteenottotaajuus
     fs = 48000;
-    
+
     % highpass lowpass
     %s1 = highpass(s1,700,fs);
     %s2 = highpass(s2,700,fs);
