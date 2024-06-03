@@ -25,6 +25,7 @@ samat_kestot = cell(tulos_rivit,sarakkeita);
 
 
 % -2 eikä -1 koska input0 haetaan yhden epochin mallia vastaava
+%% 
 for k = 1:tulos_rivit-1-yhden_epochin_vertailu
     
     % Haetaan inputin kaikki vertailut
@@ -63,7 +64,7 @@ for k = 1:tulos_rivit-1-yhden_epochin_vertailu
     end
     
     % Kyseisen rivin kesto
-    rivinkesto = 0;
+    rivinkesto = -1;
     % indeksi jolla rivillä on sopivan kestoinen koulutus
     halutturivi = 2;
     for j = 2:rivit
@@ -82,14 +83,20 @@ for k = 1:tulos_rivit-1-yhden_epochin_vertailu
 end
 
 f = figure;%('units','normalized','outerposition',[0 0 1 1]);
-t = tiledlayout(3,2);
+t = tiledlayout(2,3);
 % käännetään sarakkeet ja rivit päikseen
 %tulokset = cell(sarak-1,tulos_rivit);
 tulokset = rot90(samat_kestot);
+
+
 [rivit, sarak] = size(tulokset);
 tulokset(:,1:sarak);
 for i = 2:rivit
      if (tulokset(i,1) == "Spectrogram")
+        continue
+     end
+
+     if (tulokset(i,1) == "CT")
         continue
      end
 
@@ -98,6 +105,7 @@ for i = 2:rivit
     end
 
     X = categorical(tulokset(1,2:sarak));
+    X = reordercats(X,tulokset(1,2:sarak));
     Y = cell2mat(tulokset(i,2:sarak));
     nexttile(t)
     bar(X,Y);

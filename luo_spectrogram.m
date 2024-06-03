@@ -18,27 +18,22 @@ paths={'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\in
  'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\inputG\inputG_127epochs.wav', 'inputG'};
 
 
-paths2={ 'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_1epochs.wav', 'input0 1 epoch';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_10epochs.wav', 'input0 10 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_20epochs.wav', 'input0 20 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_30epochs.wav', 'input0 30 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_40epochs.wav', 'input0 40 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_50epochs.wav', 'input0 50 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_60epochs.wav', 'input0 60 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_80epochs.wav', 'input0 80 epochia';
-         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_107epochs.wav', 'input0 107 epochia';
+paths2={ 'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_1epochs.wav', 'input0 1 epookki';
+         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_10epochs.wav', 'input0 10 epookkia';
+         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_40epochs.wav', 'input0 40 epookkia';
+         'C:\Users\tuukk\Desktop\neural-amp-modeler-main\bin\train\output_audio\input0\input0_100epochs.wav', 'input0 100 epookkia';
          };
 
-%paths = paths2;
+paths = paths2;
 for i=1:length(paths)
     path = paths{i,1};
     title = paths{i,2};
     [a, ] = audioread(path);
     close all;  
-    [~,F,T,P]  = spectrogram(op,'yaxis');
-    [~,FA,TA,PA]  = spectrogram(a,'yaxis'); 
+    [~,F,T,P]  = spectrogram(op,[],[],[],48000,'yaxis');
+    [~,FA,TA,PA]  = spectrogram(a,[],[],[],48000,'yaxis'); 
     F = F / pi * (48000/2);
-    spektrogrammi(P,PA,T/48000,F,title);
+    spektrogrammi(P,PA,T,F,title);
 end
 
 
